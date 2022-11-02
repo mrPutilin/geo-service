@@ -7,18 +7,27 @@ public class LocalizationServiceImplTest {
     LocalizationServiceImpl sut;
 
     @Test
-    void shouldReturnRussiaOrEnglishMessageByIp() {
+    void shouldReturnRussianMessageByIp() {
         sut = new LocalizationServiceImpl();
         String rusMessage = "Добро пожаловать";
-        String engMessage = "Welcome";
 
         String result = sut.locale(Country.RUSSIA);
 
         Assertions.assertEquals(rusMessage, result);
 
+
+    }
+
+    @Test
+    void shouldReturnEnglishMessageBiIp() {
+        sut = new LocalizationServiceImpl();
+
+        String engMessage = "Welcome";
+
         String result1 = sut.locale(Country.USA);
 
         Assertions.assertEquals(engMessage, result1);
+
     }
 
 

@@ -7,7 +7,6 @@ import org.junit.jupiter.params.provider.*;
 import ru.netology.entity.Country;
 import ru.netology.entity.Location;
 import ru.netology.geo.GeoServiceImpl;
-
 import java.util.stream.Stream;
 
 public class GeoServiceImplTest {
@@ -30,11 +29,10 @@ public class GeoServiceImplTest {
     @MethodSource("source")
     public void testReturnRightLocation(String ip, String myIp, Location loc) {
 
+
         Location result = sut.byIp(myIp);
 
-        //способ номер 1
-        Assertions.assertNotNull(result);
-
+        Assertions.assertEquals(loc, result);
 
     }
 
@@ -51,8 +49,9 @@ public class GeoServiceImplTest {
     }
 
     @Test
-    public void shouldThrowRuntimeException() {
-        Assertions.assertThrows(Exception.class, () -> sut.byCoordinates(1, 1));
+    public void shouldThrowRuntimeException() throws RuntimeException {
+        Exception exception = Assertions.assertThrows(Exception.class, () -> sut.byCoordinates(1, 1), "Not implemented");
+        Assertions.assertEquals("Not implemented", exception.getMessage());
 
     }
 
